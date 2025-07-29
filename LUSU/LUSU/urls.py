@@ -20,5 +20,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('events/', include('eventpollapp.urls')),  # eventpollapp has its own urls.py
+    path('bill/',billsplit.home),
+    path('events/', include('eventpollapp.urls')),
 ]
