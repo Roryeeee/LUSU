@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Event: {{ event.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow mt-10">
+  <h1 class="text-3xl font-bold mb-4">{{ event.title }}</h1>
+  <p class="mb-4 text-gray-700">{{ event.description }}</p>
+  <p class="text-sm text-gray-500 mb-6">Created by {{ event.creator.username }}</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <h2 class="text-xl font-semibold mb-4">Select your available times:</h2>
+
+    <div class="space-y-3">
+      {% for option in time_options %}
+        <label class="flex items-center space-x-3">
+          <input
+            type="checkbox"
+            name="time_options"
+            value="{{ option.id }}"
+            {% if option.id in user_votes %} checked {% endif %}
+            class="form-checkbox h-5 w-5 text-blue-600"
+          />
+          <span>{{ option.option|date:"D, M d, Y - H:i" }}</span>
+        </label>
+      {% empty %}
+        <p>No time options available.</p>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="mt-6 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+      Submit Votes
+    </button>
+  </form>
+</div>
+{% endblock %}
