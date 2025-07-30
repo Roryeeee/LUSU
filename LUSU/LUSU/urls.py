@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('bill/',billsplit.home),
     path('events/', include('eventpollapp.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
